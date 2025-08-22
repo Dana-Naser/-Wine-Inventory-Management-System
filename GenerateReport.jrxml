@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GenerateReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32dac894-bcd9-474b-8048-7b6c9989817a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="USA"/>
+	<parameter name="FoodItem" class="java.lang.String"/>
+	<parameter name="Occasion" class="java.lang.String"/>
+	<parameter name="TypeName" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+            TblWines.SerialNumber,
+            TblWines.Name AS WineName,
+            TblWines.Description,
+            TblWines.ProductionYear,
+            TblWines.PricePerBottle AS Price,
+            TblWines.sweetnessLevel AS Sweetness,
+            TblWines.ManufacturerID,
+            TblWinesType.SuitableOccasions AS Occasions,
+            TblWinesType.Name AS WineType,
+            TblFoodPairing.DishName AS FoodPairing
+        FROM 
+            TblWines
+        LEFT JOIN 
+            TblWinesType ON TblWines.SerialNumber = TblWinesType.TypeID
+        LEFT JOIN 
+            TblFoodPairing ON TblWines.SerialNumber = TblFoodPairing.WineID
+        WHERE 
+            ($P{FoodItem} IS NULL OR TblFoodPairing.DishName LIKE CONCAT('%', $P{FoodItem}, '%'))
+            AND ($P{Occasion} IS NULL OR TblWinesType.SuitableOccasions LIKE CONCAT('%', $P{Occasion}, '%'))
+            AND ($P{TypeName} IS NULL OR TblWinesType.Name LIKE CONCAT('%', $P{TypeName}, '%'))]]>
+	</queryString>
+	<field name="SerialNumber" class="java.lang.Integer"/>
+	<field name="WineName" class="java.lang.String"/>
+	<field name="Description" class="java.lang.String"/>
+	<field name="ProductionYear" class="java.lang.Integer"/>
+	<field name="Price" class="java.lang.Integer"/>
+	<field name="Sweetness" class="java.lang.String"/>
+	<field name="ManufacturerID" class="java.lang.Integer"/>
+	<field name="Occasions" class="java.lang.String"/>
+	<field name="WineType" class="java.lang.String"/>
+	<field name="FoodPairing" class="java.lang.String"/>
+	<title>
+		<band height="60">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="60" backcolor="#851D1A" uuid="1d71c78d-d1cb-47cf-b59f-0b123232cfe1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Recommend Wines Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="25" forecolor="#FFFFFF" backcolor="#851D1A" uuid="99ec4e8d-0b8a-4f30-9389-0c8994a679ad"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="25" uuid="5f253db5-36cb-4b90-972c-54d962b4d101"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Serial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="100" height="25" uuid="c3b1a94b-c658-42da-82e3-6fc39d505285"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wine Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="150" height="25" uuid="ca004d4b-c674-470e-96eb-df460b41bc35"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="50" height="25" uuid="86c49c64-0a37-41f5-b2dc-f759c24ac3c1"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="50" height="25" uuid="6bbd3dd6-19c0-42d3-a8a1-4ffb0e032b95"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="75" height="25" uuid="12e89a5a-6a4c-4225-b8a2-26c2c47086c6"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sweetness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="80" height="25" uuid="a92894a1-d993-4148-8a38-5c55d8e9eac1"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Food Pairing]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="25" uuid="4c97f59c-e95b-401b-9d19-71bd9c982ca6"/>
+				<textFieldExpression><![CDATA[$F{SerialNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="100" height="25" uuid="67c7157b-0134-4a9d-a3c1-9f13b1fc8af6"/>
+				<textFieldExpression><![CDATA[$F{WineName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="150" height="25" uuid="34a0bff3-2133-4e25-b7e9-20f29f3b6ef3"/>
+				<textFieldExpression><![CDATA[$F{Description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="50" height="25" uuid="0c71671d-0b7b-4c50-b48f-f5bd7b4c003b"/>
+				<textFieldExpression><![CDATA[$F{ProductionYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="50" height="25" uuid="b23d9204-012d-4a78-a13e-0ed55f3200b1"/>
+				<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="75" height="25" uuid="a0627136-7d8e-4f52-9a59-d78dbbf67d34"/>
+				<textFieldExpression><![CDATA[$F{Sweetness}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="25" uuid="b74e3921-1d5f-4262-b8d4-4ef42d63b22e"/>
+				<textFieldExpression><![CDATA[$F{FoodPairing}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
