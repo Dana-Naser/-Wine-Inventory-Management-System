@@ -1,6 +1,6 @@
 # 🍷 Wine Inventory Management System
 
-![Wine Inventory System](header_wine.png)
+<img src="Wine.png" alt="Wine Inventory System" width="300" height="400"/>
 
 **Wine Inventory Management System** is a Java-based application designed to help wineries and wine shops manage their bottle inventory, suppliers, and reports efficiently.  
 The system supports adding new wine bottles, editing stock, generating reports, and storing data in a lightweight database.
@@ -47,7 +47,6 @@ Wine-Inventory-Management/
 
 ---
 
-## 🚀 How to Run
 
 ### Prerequisites
 
@@ -55,7 +54,7 @@ Wine-Inventory-Management/
 - Add UCanAccess `.jar` to your classpath
 - Compatible IDE (e.g., IntelliJ, Eclipse)
 
-### Steps
+### Running the App
 
 1. Clone or download the repository  
 2. Add database connector: `UCanAccess-5.0.1.bin`  
